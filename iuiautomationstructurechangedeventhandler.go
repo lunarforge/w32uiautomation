@@ -82,7 +82,8 @@ func structureChangedEventHandler_release(this *ole.IUnknown) int32 {
 	return pthis.ref
 }
 
-func NewStructureChangedEventHandler(handlerFunc func(this *IUIAutomationStructureChangedEventHandler, sender *IUIAutomationElement, changeType StructureChangeType, runtimeId *ole.SAFEARRAY) syscall.Handle) IUIAutomationStructureChangedEventHandler {
+//func NewStructureChangedEventHandler(handlerFunc func(this *IUIAutomationStructureChangedEventHandler, sender *IUIAutomationElement, changeType StructureChangeType, runtimeId *ole.SAFEARRAY) syscall.Handle) IUIAutomationStructureChangedEventHandler {
+func NewStructureChangedEventHandler(handlerFunc func(this *IUIAutomationStructureChangedEventHandler, sender *IUIAutomationElement, changeType StructureChangeType, runtimeId *ole.SAFEARRAY) uintptr) IUIAutomationStructureChangedEventHandler {
 	lpVtbl := &IUIAutomationStructureChangedEventHandlerVtbl{
 		IUnknownVtbl: ole.IUnknownVtbl{
 			QueryInterface: syscall.NewCallback(structureChangedEventHandler_queryInterface),

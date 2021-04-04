@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"os/exec"
 
-	wa "github.com/hnakamur/w32uiautomation"
 	"github.com/go-ole/go-ole"
+	wa "github.com/lunarforge/w32uiautomation"
 )
 
 const (
