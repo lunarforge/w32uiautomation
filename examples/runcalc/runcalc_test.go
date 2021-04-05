@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"os/exec"
+	"testing"
 
 	"github.com/go-ole/go-ole"
 	wa "github.com/lunarforge/w32uiautomation"
@@ -10,14 +11,25 @@ import (
 
 const (
 	calculatorName          = "Calculator"
-	clearButtonAutomationId = "81"
-	twoButtonAutomationId   = "132"
-	threeButtonAutomationId = "133"
-	plusButtonAutomationId  = "93"
-	equalButtonAutomationId = "121"
+	clearButtonAutomationId = "clearButton" //"81"
+	twoButtonAutomationId   = "num2Button"  //"132"
+	threeButtonAutomationId = "num3Button"  //"133"
+	plusButtonAutomationId  = "plusButton"  //"93"
+	equalButtonAutomationId = "equalButton" //"121"
 )
 
+func TestRunCalc(t *testing.T) {
+	err := runCalc()
+	if err != nil {
+		panic(err)
+	}
+
+}
+
 func runCalc() error {
+	ole.CoInitialize(0)
+	defer ole.CoUninitialize()
+
 	err := exec.Command("calc.exe").Start()
 	if err != nil {
 		return err
@@ -91,14 +103,4 @@ func pushButton(auto *wa.IUIAutomation, calc *wa.IUIAutomationElement, automatio
 		return err
 	}
 	return wa.Invoke(button)
-}
-
-func main() {
-	ole.CoInitialize(0)
-	defer ole.CoUninitialize()
-
-	err := runCalc()
-	if err != nil {
-		panic(err)
-	}
 }
