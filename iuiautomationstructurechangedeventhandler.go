@@ -54,7 +54,7 @@ func (h *IUIAutomationStructureChangedEventHandler) VTable() *IUIAutomationStruc
 	return (*IUIAutomationStructureChangedEventHandlerVtbl)(unsafe.Pointer(h.RawVTable))
 }
 
-func structureChangedEventHandler_queryInterface(this *ole.IUnknown, iid *ole.GUID, punk **ole.IUnknown) uint32 {
+func structureChangedEventHandler_queryInterface(this *ole.IUnknown, iid *ole.GUID, punk **ole.IUnknown) uintptr {
 	*punk = nil
 	if ole.IsEqualGUID(iid, ole.IID_IUnknown) ||
 		ole.IsEqualGUID(iid, ole.IID_IDispatch) {
@@ -70,20 +70,19 @@ func structureChangedEventHandler_queryInterface(this *ole.IUnknown, iid *ole.GU
 	return ole.E_NOINTERFACE
 }
 
-func structureChangedEventHandler_addRef(this *ole.IUnknown) int32 {
+func structureChangedEventHandler_addRef(this *ole.IUnknown) uintptr {
 	pthis := (*IUIAutomationStructureChangedEventHandler)(unsafe.Pointer(this))
 	pthis.ref++
-	return pthis.ref
+	return uintptr(pthis.ref)
 }
 
-func structureChangedEventHandler_release(this *ole.IUnknown) int32 {
+func structureChangedEventHandler_release(this *ole.IUnknown) uintptr {
 	pthis := (*IUIAutomationStructureChangedEventHandler)(unsafe.Pointer(this))
 	pthis.ref--
-	return pthis.ref
+	return uintptr(pthis.ref)
 }
 
-//func NewStructureChangedEventHandler(handlerFunc func(this *IUIAutomationStructureChangedEventHandler, sender *IUIAutomationElement, changeType StructureChangeType, runtimeId *ole.SAFEARRAY) syscall.Handle) IUIAutomationStructureChangedEventHandler {
-func NewStructureChangedEventHandler(handlerFunc func(this *IUIAutomationStructureChangedEventHandler, sender *IUIAutomationElement, changeType StructureChangeType, runtimeId *ole.SAFEARRAY) uintptr) IUIAutomationStructureChangedEventHandler {
+func NewStructureChangedEventHandler(handlerFunc func(this *IUIAutomationStructureChangedEventHandler, sender *IUIAutomationElement, changeType StructureChangeType, runtimeId *ole.SAFEARRAY) syscall.Handle) IUIAutomationStructureChangedEventHandler {
 	lpVtbl := &IUIAutomationStructureChangedEventHandlerVtbl{
 		IUnknownVtbl: ole.IUnknownVtbl{
 			QueryInterface: syscall.NewCallback(structureChangedEventHandler_queryInterface),
